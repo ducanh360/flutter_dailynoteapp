@@ -2,7 +2,6 @@
 
 ứng dung cho phép ghi chú nội dung trong ngày
 
-## Screeshots
 
 
 
