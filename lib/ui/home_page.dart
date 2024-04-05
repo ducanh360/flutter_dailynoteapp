@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_noteapp/controllers/task_controller.dart';
 import 'package:flutter_noteapp/models/task.dart';
+import 'package:flutter_noteapp/services/notification_services.dart';
 import 'package:flutter_noteapp/services/theme_services.dart';
 import 'package:flutter_noteapp/ui/add_task_bar.dart';
 import 'package:flutter_noteapp/ui/themes.dart';
 import 'package:flutter_noteapp/ui/widgets/button.dart';
 import 'package:flutter_noteapp/ui/widgets/task_tile.dart';
+import 'package:flutter_noteapp/services/notification_services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,6 +31,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState(){
     super.initState();
+    notifyHelper=NotifyHelper();
+    notifyHelper.initializeNotification();
   }
   
 
@@ -257,6 +261,10 @@ _appBar(){
     leading: GestureDetector(
       onTap: (){
           ThemeService().switchTheme();
+          notifyHelper.displayNotification(
+            title:"Theme Changed",
+            body:Get.isDarkMode?"Activate Dark Theme":"Activate Light Theme"
+          );
       },
       child: Icon(Icons.nightlight_round, size: 20,),
     ),
